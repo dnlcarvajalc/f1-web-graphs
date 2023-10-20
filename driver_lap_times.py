@@ -18,24 +18,20 @@ class plot_lap_times:
         self.all_laps_df = self.get_laptimes_dataframe(self.number_of_laps)
         self.plot_graph()
 
-    def get_laptimes_dataframe(self, number_of_laps: int):
+    def get_laptimes_dataframe(self, number_of_laps: int) -> pd.DataFrame:
         all_laps_df = pd.DataFrame()
         for lap_number in range(1, int(number_of_laps) + 1):
             endpoint = f"{self.year_race}/{self.round_race}/laps/{lap_number}"
             url = BASE_URL + endpoint
             data_dict = utils.return_data_response(url)
 
-            timing_data = data_dict["MRData"]["RaceTable"]["Race"]["LapsList"]["Lap"]["Timing"]
+            timing_data = data_dict["MRData"]["RaceTable"]["Race"]["LapsList"]["Lap"][
+                "Timing"
+            ]
             one_lap_df = pd.DataFrame(timing_data)
             all_laps_df = pd.concat([all_laps_df, one_lap_df], axis=0)
 
-        # Convert lap times to seconds for plotting
-        all_laps_df["@time"] = (
-            pd.to_datetime(all_laps_df["@time"], format="%M:%S.%f").dt.minute * 60
-            + pd.to_datetime(all_laps_df["@time"], format="%M:%S.%f").dt.second
-            + pd.to_datetime(all_laps_df["@time"], format="%M:%S.%f").dt.microsecond
-            / 1000000
-        )
+        all_laps_df = utils.laptimes_to_seconds(all_laps_df)
 
         return all_laps_df
 
