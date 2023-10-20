@@ -25,9 +25,7 @@ class plot_lap_times:
             url = BASE_URL + endpoint
             data_dict = utils.return_data_response(url)
 
-            timing_data = data_dict["MRData"]["RaceTable"]["Race"]["LapsList"]["Lap"][
-                "Timing"
-            ]
+            timing_data = data_dict["MRData"]["RaceTable"]["Race"]["LapsList"]["Lap"]["Timing"]
             one_lap_df = pd.DataFrame(timing_data)
             all_laps_df = pd.concat([all_laps_df, one_lap_df], axis=0)
 
