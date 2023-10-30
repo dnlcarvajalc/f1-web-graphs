@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import utils
-from variables import BASE_URL
+import src.utils as utils
+from src.variables import BASE_URL
 
 
 class plot_lap_times:
