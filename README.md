@@ -80,7 +80,7 @@ exclude = '''(
 ```
 ### To use pytest to see coverage of unit testing:
 ```
-pytest --cov=src.utils
+pytest --cov=src
 ```
 ```
 coverage html
