@@ -36,7 +36,6 @@ def get_number_of_laps_done(year_race: int, round_race: int, base_url: str) -> i
     endpoint = f"{year_race}/{round_race}/results"
     url = base_url + endpoint
     data_dict = return_data_response(url)
-    print(data_dict)
 
     driver_results = data_dict["MRData"]["RaceTable"]["Race"]["ResultsList"]["Result"]
     for driver in driver_results:
