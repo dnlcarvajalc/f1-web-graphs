@@ -3,10 +3,6 @@ import pandas as pd
 import src.utils as utils
 from unittest.mock import patch
 
-# pytest --cov=src.utils
-# coverage html
-
-# A sample response XML string for testing
 sample_xml_response = """<root>
     <data>
         <item1>Value1</item1>
@@ -50,16 +46,14 @@ def test_get_number_of_laps_done():
     with patch.object(utils, "return_data_response", return_value=sample_json_response):
         number_of_laps = utils.get_number_of_laps_done(year_race, round_race, base_url)
 
-    assert number_of_laps == 54  # Expecting 54 laps made by the driver in the first position
-
-
-data = {
-    "@time": ["01:30.500", "02:45.123", "00:59.999"],
-}
-sample_df = pd.DataFrame(data)
+    assert number_of_laps == 54
 
 
 def test_laptimes_to_seconds():
+    data = {
+        "@time": ["01:30.500", "02:45.123", "00:59.999"],
+    }
+    sample_df = pd.DataFrame(data)
     result_df = utils.laptimes_to_seconds(sample_df)
 
     expected_data = {

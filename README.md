@@ -78,3 +78,10 @@ exclude = '''(
   | ^setup\.py$
 )'''
 ```
+### To use pytest to see coverage of unit testing:
+```
+pytest --cov=src.utils
+```
+```
+coverage html
+```
